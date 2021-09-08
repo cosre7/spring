@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller // 스프링에서 컨트롤러임을 나타내는 애노테이션
 public class HelloController {
@@ -30,4 +31,15 @@ public class HelloController {
 		model.addAttribute("name", name);
 		return "hello-template";
 	}
+	
+	@GetMapping("hello-String")
+	@ResponseBody	// http의 응답 body 부에 직접 return ~을 넣어주겠다!
+	public String HelloString(@RequestParam("name") String name) {
+		return "hello " + name; // hello 이름" 이라는 문자가 요청 클라이언트로 그대로 전달
+		// 뷰 같은 것이 없이 그대로 내려간다.
+		// 소스보기를 하면 문자열 그대로 나타난다.
+	}
+	
+	
+	
 }
