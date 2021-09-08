@@ -18,14 +18,6 @@ public class HelloController {
 	
 	// 파라미터를 받아서 리턴해주는 메서드
 	// 웹 브라우저에서 localhost:8080/hello-mvc?name= 에 값을 넣어준 상태로 실행
-	/* localhost:8080/hello-mvc?name=이름 이라고 실행했다면
-	 * 1. name 파라미터 값으로 이름 이 담긴 상태로 helloMvc 메서드 호출
-	 * 2. name의 값이 모델에 담긴다.
-	 * 3. hello-template으로 리턴한다.
-	 * 4. viewResolver가 hello-template.html로 연결해준다.
-	 * 5. hello-template.html에서 ${name} 자리에 이름 이 담긴 상태로 출력 (변환은 Thymeleaf의 역할)
-	 */
-	
 	@GetMapping("hello-mvc") 
 	public String helloMvc(@RequestParam("name") String name, Model model) {
 		model.addAttribute("name", name);
@@ -40,6 +32,30 @@ public class HelloController {
 		// 소스보기를 하면 문자열 그대로 나타난다.
 	}
 	
+	@GetMapping("hello-api") 
+	@ResponseBody
+	public Hello helloAPI(@RequestParam("name") String name) {
+		
+		Hello hello = new Hello();
+		hello.setName(name);
+		return hello;
+		// JSON 방식으로 결과 출력 // {"name":"이름"}
+	}
 	
+	static class Hello { 
+		// class 안에서 static class 를 선언하는 것도 가능!
+		// HelloController.Hello 등의 방식으로 사용한다.
+		private String name;
+
+		// getter, setter -> 자바 빈 규약(표준 방식) or 프로퍼티 접근 방식
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+		
+	}
 	
 }
