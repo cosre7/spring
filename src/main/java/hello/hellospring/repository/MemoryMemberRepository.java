@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import hello.hellospring.domain.Member;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository {
 	
 	// 리포지토리의 내용을 저장해줄 메모리 공간
